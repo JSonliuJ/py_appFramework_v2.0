@@ -1,0 +1,7 @@
+automationName: UiAutomator2
+platformName: Android
+platformVersion: 7.1
+deviceName: huawei
+appPackage: com.lemon.lemonban
+appActivity: com.lemon.lemonban.activity.WelcomeActivity
+noReset: True
