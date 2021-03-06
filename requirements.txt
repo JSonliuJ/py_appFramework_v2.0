@@ -1,0 +1,16 @@
+Appium-Python-Client==1.0.2
+atomicwrites==1.4.0
+attrs==20.3.0
+colorama==0.4.4
+iniconfig==1.1.1
+mb==0.9.2.0
+packaging==20.9
+pluggy==0.13.1
+py==1.10.0
+pyparsing==2.4.7
+pytest==6.2.2
+pywin32==300
+PyYAML==5.4.1
+selenium==3.141.0
+toml==0.10.2
+urllib3==1.25.10
