@@ -8,9 +8,9 @@ import win32con
 # pip install pywin32
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from python_AppTest.py_appTest_framework2.common.basepage import BasePage
+from common.basepage import BasePage
 from selenium.webdriver.remote.webdriver import WebDriver
-from python_AppTest.py_appTest_framework2.common.logginghandler import logger
+from common.logginghandler import logger
 
 
 class WebPage:

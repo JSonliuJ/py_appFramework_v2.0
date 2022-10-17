@@ -7,7 +7,7 @@ import logging
 from logging import Logger
 import os
 
-from python_AppTest.py_appTest_framework2.common.filehandler import FileHandler
+from common.filehandler import FileHandler
 
 # from config.settings import  dev_settings
 

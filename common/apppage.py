@@ -5,10 +5,13 @@
 # @file: 		apppage
 import time
 
-from python_AppTest.py_appTest_framework2.common.basepage import BasePage
+from selenium.webdriver import ActionChains
+
+from common.basepage import BasePage
 from appium.webdriver import Remote
 from appium.webdriver.common.mobileby import MobileBy
-from python_AppTest.py_appTest_framework2.common.logginghandler import logger
+from selenium.webdriver.common.actions.mouse_button import MouseButton
+from common.logginghandler import logger
 
 
 class AppPage:
@@ -22,7 +25,7 @@ class AppPage:
             size = self.driver.get_window_size()
         except:
             logger.error('获取屏幕尺寸失败')
-            BasePage(self.driver).save_page_shot(img_name=)
+            BasePage(self.driver).save_page_shot(img_name='get_size_files')
             raise
         else:
             return size
@@ -66,7 +69,8 @@ class AppPage:
 
     # toast获取
     def get_toast(self, text, img_name, timeout=10, poll_fre=0.01):
-        loc = (MobileBy.XPATH, '//*[contains(@text(),"{}")]'.format(text))
+        loc = (MobileBy.XPATH,'//android.widget.Toast') # 方式1
+        # loc = (MobileBy.XPATH, '//*[contains(@text(),"{}")]'.format(text)) # 方式2
         logger.info('获取toast提示信息，toast元素为：{}'.format(loc))
         # 等待元素存在并获取文本内容
         self.bp.wait_element_exist(loc, img_name, timeout, poll_fre)
@@ -84,6 +88,7 @@ class AppPage:
     def switch_application(self,package_name,activity_name):
         logger.info('切换到{}应用'.format(package_name))
         self.driver.start_activity(package_name,activity_name)
+
     # 混合应用-获取所有的，然后切换，webview的名称
     def switch_multi_app(self,loc,img_name,t=2):
         """
@@ -104,6 +109,67 @@ class AppPage:
             logger.exception('切换到{}失败'.format(loc))
             self.bp.save_page_shot(img_name)
             raise
+
+    def zoom(self, step=0.5, duration=None):
+        """
+        :param step:
+        :param duration: 停顿时间
+        :return:
+        """
+        actions = ActionChains(self.driver)
+        actions.w3c_actions.devices = []
+        finger1 = actions.w3c_actions.add_pointer_input('touch', f'finger1')
+        finger2 = actions.w3c_actions.add_pointer_input('touch', f'finger2')
+
+        width = self.driver.get_window_size()['width']
+        height = self.driver.get_window_size()['height']
+
+        for finger in [finger1, finger2]:
+            finger.create_pointer_move(x=width * 0.5, y=height * 0.5)
+            finger.create_pointer_down(MouseButton.LEFT)
+            if duration:
+                finger.create_pause(duration / 1000)
+            else:
+                finger.create_pause(0.1)
+
+        finger1.create_pointer_move(x=width * 0.5, y=height * (0.5 + step / 2))
+        finger2.create_pointer_move(x=width * 0.5, y=height * (0.5 - step / 2))
+
+        finger1.create_pointer_up(MouseButton.LEFT)
+        finger2.create_pointer_up(MouseButton.LEFT)
+
+        actions.perform()
+
+    def pitch(self, step=0.5, duration=None):
+        """
+        :param step:
+        :param duration:
+        :return:
+        """
+        actions = ActionChains(self.driver)
+        actions.w3c_actions.devices = []
+        # 1、使用add_point_input添加手指，放大需要用到两个手指。
+        finger1 = actions.w3c_actions.add_pointer_input('touch', f'finger1')
+        finger2 = actions.w3c_actions.add_pointer_input('touch', f'finger2')
+
+        width = self.driver.get_window_size()['width']
+        height = self.driver.get_window_size()['height']
+        # 2、使用create_pointer_move移动到屏幕的正中间
+        finger1.create_pointer_move(x=width * 0.5, y=height * (0.5 + step / 2))
+        finger2.create_pointer_move(x=width * 0.5, y=height * (0.5 - step / 2))
+        # 3、使用create_pointer_down按下手指
+        for finger in [finger1, finger2]:
+            finger.create_pointer_down(MouseButton.LEFT)
+            if duration:
+                finger.create_pause(duration / 1000)
+            else:
+                finger.create_pause(0.1)
+            # 4、使用create_pointer_move往屏幕相反方向移动
+            finger.create_pointer_move(x=width * 0.5, y=height * 0.5)
+            # 5、使用create_pointer_up松开手指
+            finger.create_pointer_up(MouseButton.LEFT)
+
+        actions.perform()
     # 微信小程序/公众号
 
 

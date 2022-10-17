@@ -9,9 +9,8 @@ import os
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webdriver import WebDriver
-from python_AppTest.py_appTest_framework2.common.filehandler import FileHandler
-from python_AppTest.py_appTest_framework2.common.logginghandler import logger
-
+from common.filehandler import FileHandler
+from common.logginghandler import logger
 
 
 # 记录日志/失败截图+错误信息输出+抛出异常
@@ -32,7 +31,6 @@ class BasePage:
             self.save_page_shot(img_name)
             logger.exception('等待{}元素可见失败'.format(loc))
             raise
-
         else:
             # 结束等待时间
             end = datetime.datetime.now()
@@ -41,6 +39,7 @@ class BasePage:
         logger.info('总共等待时长:{}'.format(wait_times))
 
     def wait_element_exist(self, loc, img_name, timeout=20, poll_fre=0.5):
+        # 等待元素存在
         global end
         logger.info('{}等待{}元素存在'.format(img_name, loc))
         # 开始等待时间
@@ -61,6 +60,7 @@ class BasePage:
         logger.info('总共等待时长:{}'.format(wait_times))
 
     def wait_ele_clickable(self, loc, img_name, timeout=20, poll_fre=0.5):
+        # 等待元素可点击
         logger.info('{}等待{}元素可点击'.format(img_name, loc))
         # 开始等待时间
         try:
@@ -70,8 +70,8 @@ class BasePage:
             logger.exception('等待{}元素可点击失败'.format(loc))
             raise
 
-    # 查找元素
     def find_element(self, loc, img_name):
+        # 查找元素
         self.wait_ele_visible(loc, img_name)
         logger.info('在{}查找{}元素'.format(img_name, loc))
         try:
@@ -83,8 +83,8 @@ class BasePage:
         else:
             return ele
 
-    # 查找所有元素
     def find_elements(self, loc, img_name):
+        # 查找所有元素
         self.wait_ele_visible(loc, img_name)
         logger.info('{}查找{}所有元素'.format(img_name, loc))  # img_name 页面名称_模块名称
         try:
@@ -95,10 +95,9 @@ class BasePage:
             raise
         else:
             return ele
-        # 点击元素
 
-    # 点击元素
     def click_element(self, loc, img_name, timeout=20, poll_fre=0.5):
+        # 点击元素
         self.wait_ele_visible(loc, img_name, timeout, poll_fre)  # 必然前提1
         ele = self.find_element(loc, img_name)  # 必然前提2
         logger.info('在{}点击{}元素'.format(img_name, loc))
