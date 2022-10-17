@@ -26,7 +26,7 @@ import os
 import pytest
 import yaml
 from appium import webdriver
-from python_AppTest.py_appTest_framework2.common.filehandler import FileHandler
+from common.filehandler import FileHandler
 
 
 @pytest.fixture()
@@ -44,8 +44,8 @@ def init(port=4723, **kwargs):
 
     fs.close()
     print(desired_caps)
-    # driver = webdriver.Remote('http://127.0.0.1:{}/wd/hub'.format(port), desired_caps)
-    # return driver
+    driver = webdriver.Remote('http://127.0.0.1:{}/wd/hub'.format(port), desired_caps)
+    return driver
 
 
 if __name__ == '__main__':
