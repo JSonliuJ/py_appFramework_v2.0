@@ -111,6 +111,7 @@ class AppPage:
             raise
 
     def zoom(self, step=0.5, duration=None):
+        # 放大
         """
         :param step:
         :param duration: 停顿时间
@@ -141,6 +142,7 @@ class AppPage:
         actions.perform()
 
     def pitch(self, step=0.5, duration=None):
+        # 缩小
         """
         :param step:
         :param duration:
@@ -170,8 +172,11 @@ class AppPage:
             finger.create_pointer_up(MouseButton.LEFT)
 
         actions.perform()
+        
+    def press_enter(self):
+        """回车"""
+        self.driver.press_keycode(66)
     # 微信小程序/公众号
-
 
 if __name__ == '__main__':
     pass
