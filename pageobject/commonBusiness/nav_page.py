@@ -6,7 +6,7 @@
 """
 导航页面
 """
-from python_AppTest.py_appTest_framework2.common.basepage import BasePage
+from common.basepage import BasePage
 class NavPage(BasePage):
     def switch_by_nav_name(self,nav_name):
         pass
