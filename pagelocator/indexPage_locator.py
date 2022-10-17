@@ -5,10 +5,7 @@
 # @file: 		indexPage_locator
 from  appium.webdriver.common.mobileby import MobileBy as MB
 class IndexPageLocator:
-    # 导航栏
-    #主页
-    home_nav_loc = (MB.ID, "com.lemon.lemonban:id/navigation_home" )
-    # 题库
-    tiku_nav_loc = (MB.ID, "com.lemon.lemonban:id/navigation_tiku")
-    #我的柠檬
-    my_nav_loc = (MB.ID, "com.lemon.lemonban:id/navigation_my")
+    # 搜索按钮
+    click_search_button = (MB.XPATH, '//*[contains(@resource-id,"searchWidget")]//*[@text="搜索"]' )
+    # 搜索输入框
+    search_stock_or_fund = (MB.XPATH, '//*[@text="搜索"]/../..//*[@resource-id="com.hundsun.winner.pazq:id/edit_search"]')
