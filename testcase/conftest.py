@@ -30,7 +30,7 @@ from common.filehandler import FileHandler
 
 
 @pytest.fixture()
-def login_app():
+def login_app(init):
     driver = init()
 
 
