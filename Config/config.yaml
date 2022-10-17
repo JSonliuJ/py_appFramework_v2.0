@@ -1,7 +1,7 @@
 automationName: UiAutomator2
 platformName: Android
-platformVersion: 7.1
-deviceName: huawei
-appPackage: com.xxx
-appActivity: com.xxxx.activity.WelcomeActivity
+platformVersion: 7.1.1
+deviceName: emulator-5554
+appPackage: com.hundsun.winner.pazq
+appActivity: com.hundsun.winner.pazqapp.ui.home.activity.NewSplashActivity
 noReset: True
