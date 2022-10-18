@@ -32,3 +32,26 @@ unicodeKeyboard =
 ChromeOption
 ```
 8. 配置功能：py、yaml、ini
+## docker+jenkins搭建自动化用例
+**1.** 安装jenkins：
+```
+docker run -dit --name=mmmm_jenkins  \ 
+-p 8000:8080  \ 
+-u=root -v /var/run/docker.sock:/var/run/docker.sock  \ 
+-v /usr/bin/docker:/usr/bin/docker 
+jenkins/jenkins
+```
+**2.** 创建Dockerfile文件
+```
+FROM python:3.8
+COPY . .
+RUN pip3 install -r requirements.txt
+CMD [ "python3", "run.py"]
+```
+
+**3.** jenkins构建任务,shell执行脚本
+```
+docker build --tag 容器名 .
+docker run 容器名
+docker rmi 容器名
+```
