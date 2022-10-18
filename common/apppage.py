@@ -172,7 +172,7 @@ class AppPage:
             finger.create_pointer_up(MouseButton.LEFT)
 
         actions.perform()
-        
+
     def press_enter(self):
         """回车"""
         self.driver.press_keycode(66)
