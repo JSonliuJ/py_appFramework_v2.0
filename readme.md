@@ -32,7 +32,7 @@ unicodeKeyboard =
 ChromeOption
 ```
 8. 配置功能：py、yaml、ini
-## docker+jenkins搭建自动化用例
+## 02 docker+jenkins搭建自动化用例
 **1.** 安装jenkins：
 ```
 docker run -dit --name=mmmm_jenkins  \ 
@@ -55,3 +55,8 @@ docker build --tag 容器名 .
 docker run 容器名
 docker rmi 容器名
 ```
+## 03小程序/公众号 测试
+- 连接真机：开启usb调式模式，
+- 打开x5内核调试模式：http://debugmm.qq.com/?forcex5=true
+- mumu模拟器显示真机屏幕
+
